@@ -5,20 +5,34 @@ class LoginPage extends Component {
     return (
       <div className='container'>
         <form>
-          <div className="form-group">
-            <label htmlFor="exampleInputUserName">User Name</label>
-            <input type="text" className="form-control" id="exampleInputUserName" aria-describedby="emailHelp" placeholder="Enter User Name" />
+          <div className='form-group'>
+            <label htmlFor='exampleInputUserName'>User Name</label>
+            <input
+              placeholder='User name'
+              className='form-control'
+              key='userName'
+              type='text'
+              defaultValue={ this.state.userName }
+              autoComplete='new-password'
+              onChange={( event ) => this.inputChangedHandler( event, 'userName' )} required />
           </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
-            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+          <div className='form-group'>
+            <label htmlFor='exampleInputUserName'>Password</label>
+            <input
+              placeholder='Password'
+              className='form-control '
+              key='password'
+              type='password'
+              defaultValue={ this.state.password }
+              autoComplete='new-password'
+              onChange={( event ) => this.inputChangedHandler( event, 'password' )} required />
           </div>
-          <button type="submit" className="btn btn-primary">Login</button>
-          </form>
+          <button type='submit' className='btn btn-primary'>Login</button>
+        </form>
       </div>
-    );
+    )
   }
 
 }
 
-export default LoginPage;
+export default LoginPage
