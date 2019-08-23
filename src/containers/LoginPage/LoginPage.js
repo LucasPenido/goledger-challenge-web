@@ -1,10 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import axios from 'axios'
 
 class LoginPage extends Component {
+  state = {
+    userName: '',
+    password: '',
+    isSignup: true
+  }
+
+  submitHandler = ( event ) => {
+    event.preventDefault()
+
+    const body = {
+      username: this.state.userName,
+      password: this.state.password
+    }
+
+    axios.post('http://ec2-18-223-158-118.us-east-2.compute.amazonaws.com:3000/api/login',
+    body).then(res => {
+
+    })
+  }
+
+  inputChangedHandler = ( event, controlName ) => {
+    this.setState( { [controlName]: event.target.value })
+  }
+
   render() {
     return (
       <div className='container'>
-        <form>
+        <form onSubmit={ this.submitHandler }>
           <div className='form-group'>
             <label htmlFor='exampleInputUserName'>User Name</label>
             <input
