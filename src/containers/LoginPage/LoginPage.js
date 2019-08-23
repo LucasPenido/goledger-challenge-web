@@ -1,29 +1,20 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 class LoginPage extends Component {
   state = {
-    userName: '',
+    username: '',
     password: '',
-    isSignup: true
   }
 
   submitHandler = ( event ) => {
-    event.preventDefault()
-
-    const body = {
-      username: this.state.userName,
-      password: this.state.password
-    }
-
-    axios.post('http://ec2-18-223-158-118.us-east-2.compute.amazonaws.com:3000/api/login',
-    body).then(res => {
-
-    })
+    event.preventDefault();
+    this.props.onAuth( this.state.username, this.state.password );
   }
 
   inputChangedHandler = ( event, controlName ) => {
-    this.setState( { [controlName]: event.target.value })
+    this.setState( { [controlName]: event.target.value });
   }
 
   render() {
@@ -35,11 +26,11 @@ class LoginPage extends Component {
             <input
               placeholder='User name'
               className='form-control'
-              key='userName'
+              key='username'
               type='text'
-              defaultValue={ this.state.userName }
+              defaultValue={ this.state.username }
               autoComplete='new-password'
-              onChange={( event ) => this.inputChangedHandler( event, 'userName' )} required />
+              onChange={( event ) => this.inputChangedHandler( event, 'username' )} required />
           </div>
           <div className='form-group'>
             <label htmlFor='exampleInputUserName'>Password</label>
@@ -55,9 +46,24 @@ class LoginPage extends Component {
           <button type='submit' className='btn btn-primary'>Login</button>
         </form>
       </div>
-    )
+    );
   }
-
 }
 
-export default LoginPage
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+    isAuthenticated: state.auth.token !== null,
+    authRedirectPath: state.auth.authRedirectPath
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuth: ( email, password ) => dispatch( actions.auth( email, password ) ),
+    onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+  };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( LoginPage );
