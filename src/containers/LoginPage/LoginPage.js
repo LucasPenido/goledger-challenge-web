@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
+import AirPlane from '../../images/aeroplane.png';
+
+import './LoginPage.css';
 
 class LoginPage extends Component {
   state = {
@@ -19,32 +22,39 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className='container'>
-        <form onSubmit={ this.submitHandler }>
-          <div className='form-group'>
-            <label htmlFor='exampleInputUserName'>User Name</label>
-            <input
-              placeholder='User name'
-              className='form-control'
-              key='username'
-              type='text'
-              defaultValue={ this.state.username }
-              autoComplete='new-password'
-              onChange={( event ) => this.inputChangedHandler( event, 'username' )} required />
+      <div className='App'>
+        <div className="App__Aside">
+            <img className="Logo" src={AirPlane} alt = "PilotsLogo" />
+        </div>
+        <div className='App__Form'>
+          <div className='FormCenter'>
+            <form onSubmit={ this.submitHandler }>
+              <div className='form-group'>
+                <label htmlFor='exampleInputUserName'>Username</label>
+                <input
+                  placeholder='username'
+                  className='form-control'
+                  key='username'
+                  type='text'
+                  defaultValue={ this.state.username }
+                  autoComplete='new-password'
+                  onChange={( event ) => this.inputChangedHandler( event, 'username' )} required />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='exampleInputUserName'>Password</label>
+                <input
+                  placeholder='******'
+                  className='form-control '
+                  key='password'
+                  type='password'
+                  defaultValue={ this.state.password }
+                  autoComplete='new-password'
+                  onChange={( event ) => this.inputChangedHandler( event, 'password' )} required />
+              </div>
+              <button type='submit' className='FormField__Button'>Login</button>
+            </form>
           </div>
-          <div className='form-group'>
-            <label htmlFor='exampleInputUserName'>Password</label>
-            <input
-              placeholder='Password'
-              className='form-control '
-              key='password'
-              type='password'
-              defaultValue={ this.state.password }
-              autoComplete='new-password'
-              onChange={( event ) => this.inputChangedHandler( event, 'password' )} required />
-          </div>
-          <button type='submit' className='btn btn-primary'>Login</button>
-        </form>
+        </div>
       </div>
     );
   }

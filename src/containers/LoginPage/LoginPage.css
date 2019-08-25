@@ -1,0 +1,39 @@
+.App {
+  height: 100vh;
+  display: flex;
+  color: gray;
+}
+
+.App__Aside {
+  width: 50%;
+  background-color: #FFFFFF;
+}
+
+.App__Form {
+  width: 50%;
+  background-color: #F4F4F4;
+  padding: 2vh 2vw;
+  overflow: auto;
+}
+
+.FormCenter {
+  padding-top: 25vh;
+}
+
+.FormField__Button {
+  background-color: #154975;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 12px 70px;
+  font-size: .9em;
+  font-weight: 500;
+  cursor:pointer;
+}
+
+.Logo {
+  width: 25vw;
+  padding-top: 20vh;
+  margin: auto;
+}
