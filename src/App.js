@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import LoginPage from './containers/LoginPage/LoginPage';
 import * as actions from './store/actions/index';
@@ -8,11 +9,23 @@ class App extends Component {
   componentDidMount () {
     this.props.onTryAutoSignup();
   }
-  
+
   render() {
+    let routes;
+    this.props.isAuthenticated ?
+    routes = (
+      <Switch>
+      </Switch>
+    ) :
+    routes = (
+      <Switch>
+        <Route path='/' exact component={LoginPage} />
+      </Switch>
+    )
+
     return (
       <div className="App">
-        <LoginPage/>
+        {routes}
       </div>
     );
   }
@@ -30,4 +43,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( App );
+export default withRouter(connect( mapStateToProps, mapDispatchToProps )( App ));
