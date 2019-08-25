@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import LoginPage from './containers/LoginPage/LoginPage';
+import Header from './components/Header'
 import * as actions from './store/actions/index';
 
 class App extends Component {
@@ -14,8 +15,11 @@ class App extends Component {
     let routes;
     this.props.isAuthenticated ?
     routes = (
-      <Switch>
-      </Switch>
+      <div>
+        <Header/>
+        <Switch>
+        </Switch>
+      </div>
     ) :
     routes = (
       <Switch>
@@ -24,7 +28,7 @@ class App extends Component {
     )
 
     return (
-      <div className="App">
+      <div>
         {routes}
       </div>
     );
