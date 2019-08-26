@@ -24,7 +24,7 @@ class LoginPage extends Component {
     return (
       <div className='App'>
         <div className="App__Aside">
-            <img className="Logo" src={AirPlane} alt = "PilotsLogo" />
+          <img className="Logo" src={AirPlane} alt="PilotsLogo" title='Icon made by Flaticon Basic License from www.flaticon.com'/>
         </div>
         <div className='App__Form'>
           <div className='FormCenter'>
@@ -51,6 +51,7 @@ class LoginPage extends Component {
                   autoComplete='new-password'
                   onChange={( event ) => this.inputChangedHandler( event, 'password' )} required />
               </div>
+              <p style={{color:'red'}}>{this.props.error}</p>
               <button type='submit' className='FormField__Button'>Login</button>
             </form>
           </div>
