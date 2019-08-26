@@ -8,7 +8,7 @@ class Header extends Component {
   render () {
     return (
       <nav className="navbar navbar-light" >
-        <a className="navbar-brand" href='/'>Pilots</a>
+        <a className="navbar-brand" href='/'>Pilotos</a>
         <button className="btn btn-outline-dark my-2 my-sm-0" type="button" onClick={this.props.logout}>
           Logout
         </button>
