@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { cpfMask } from '../../mask/cpfMask';
 import './AeronautInfoPage.css';
+import * as actions from '../../store/actions/index';
 
 class AeronautInfoPage extends Component {
   state = {
@@ -36,7 +37,9 @@ class AeronautInfoPage extends Component {
       this.setState({operadorAereo: temp})
     })
     .catch(err => {
-      console.log(err.data);
+      if (err.response.data === 'Unauthorized') {
+        this.props.logout();
+      }
     });
   }
 
@@ -62,20 +65,20 @@ class AeronautInfoPage extends Component {
 
     if (this.state.operadorAereo.length === 0) {
       return (
-        <div className="pilot-page">
-          <div className="spinner-border text-primary" role="status">
-            <span className="sr-only">Loading...</span>
+        <div className='pilot-page'>
+          <div className='spinner-border text-primary' role='status'>
+            <span className='sr-only'>Loading...</span>
           </div>
         </div>
       )
     }
 
     return (
-      <div className="pilot-page">
+      <div className='pilot-page'>
         <form style={{marginBottom: '5vh'}}>
           <h3>Lista de pilotos</h3>
           <div className='select-bar'>
-            <select className="form-control select2" onChange={selectionHandler}>
+            <select className='form-control select2' onChange={selectionHandler}>
               <option hidden>Selecione uma copanhia aérea</option>
               {
                 this.state.operadorAereo.map((op) => {
@@ -87,12 +90,12 @@ class AeronautInfoPage extends Component {
         </form>
         {
           this.state.operator ? (
-            <table className="table table-striped table-bordered">
+            <table className='table table-striped table-bordered'>
               <thead>
                 <tr>
-                  <th scope="col">Nome</th>
-                  <th scope="col">CPF</th>
-                  <th scope="col">CANAC</th>
+                  <th scope='col'>Nome</th>
+                  <th scope='col'>CPF</th>
+                  <th scope='col'>CANAC</th>
                 </tr>
               </thead>
               <tbody>
@@ -114,4 +117,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect( mapStateToProps )( AeronautInfoPage ) ;
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(actions.logout())
+  };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( AeronautInfoPage ) ;
