@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import LoginPage from './containers/LoginPage/LoginPage';
+import AeronautInfoPage from './containers/AeronautInfoPage/AeronautInfoPage'
 import Header from './components/Header'
 import * as actions from './store/actions/index';
 
@@ -18,6 +19,7 @@ class App extends Component {
       <div>
         <Header/>
         <Switch>
+          <Route path='/' exact component={AeronautInfoPage} />
         </Switch>
       </div>
     ) :
